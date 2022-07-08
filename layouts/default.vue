@@ -1,14 +1,12 @@
 <template>
-  <div id="page">
+  <div id="page" style="height: 100vh;" class="d-flex flex-column">
     <b-container fluid>
-      <div>My nav bar</div>
+      <RdmsysHeader />
     </b-container>
-    <b-container>
+    <b-container class="mb-5 flex-grow-1">
       <Nuxt />
     </b-container>
-    <b-container fluid>
-      <div>My footer</div>
-    </b-container>
+      <RdmsysFooter/>
   </div>
 </template>
 
