@@ -88,5 +88,11 @@ export default {
   },
 
   ssr: false, // サーバーサイドレンダリングを無効化
-  target: 'server'
+  target: 'server',
+
+  env: {
+    MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
+    MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
+    MAILGUN_FROM_ADDRESS: process.env.MAILGUN_FROM_ADDRESS
+  }
 }
