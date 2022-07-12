@@ -55,6 +55,7 @@ props: ["section"],
       if (_.isEmpty(this.formValue)) errors.required = 1;
       if (!isEmail(this.formValue)) errors.email = 1;
       this.errors = errors;
+      this.$emit('update:errors', this.errors);
     }
   }
 };

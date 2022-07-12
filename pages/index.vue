@@ -4,7 +4,7 @@
     <NuxtChild section="before" />
     <p>プライバシーポリシーはこちら</p>
     <form id="form" @submit="onSubmit" method="POST">
-      <NuxtChild section="form-body" v-bind:formValue.sync="formValue"/>
+      <NuxtChild section="form-body" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors"/>
       <div class="d-flex flex-row align-items-center justify-content-center mb-5">
         <div>
           <b-button variant="light" class="mx-2">リセット</b-button>
@@ -38,6 +38,7 @@ export default {
   data(){
     return {
       formValue: "",
+      errors: {}
     }
   },
   name: "IndexPage",
