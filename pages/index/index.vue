@@ -12,15 +12,15 @@
           id="email"
           type="email"
           v-model="formValue"
-          :state="false"
+          :state="hasError"
           placeholder="mailto@address.com"
           required="required"
           @input="updateValue"
         ></b-form-input>
         <b-form-invalid-feedback id="email">
           <ul class="list-unstyled">
-            <li>メールアドレスが不正です</li>
-            <li>入力必須項目です</li>
+            <li v-if="errors.email">メールアドレスが不正です</li>
+            <li v-if="errors.required">入力必須項目です</li>
           </ul>
         </b-form-invalid-feedback>
       </b-col>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import isEmail from 'is-email';
+
 export default {
 props: ["section"],
   data() {
@@ -37,9 +39,22 @@ props: ["section"],
       formValue: ""
     };
   },
+  computed: {
+    hasError(){
+      if(this.formValue === "" && _.isUndefined(this.errors.required)) return null;
+      return _.isEmpty(_.keys(this.errors));
+    }
+  },
   methods:{
     updateValue(){
       this.$emit('update:formValue', this.formValue);
+      this.formValidation();
+    },
+    formValidation(){
+      var errors = {};
+      if (_.isEmpty(this.formValue)) errors.required = 1;
+      if (!isEmail(this.formValue)) errors.email = 1;
+      this.errors = errors;
     }
   }
 };
