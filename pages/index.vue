@@ -4,13 +4,27 @@
     <NuxtChild section="before" />
     <p>プライバシーポリシーはこちら</p>
     <form id="form" @submit="onSubmit" method="POST">
-      <NuxtChild section="after" />
-      <div class="d-flex flex-row align-items-center justify-content-center">
-        <div><b-button variant="light">リセット</b-button></div>
+      <NuxtChild section="form-body" v-bind:formValue.sync="formValue"/>
+      <div class="d-flex flex-row align-items-center justify-content-center mb-5">
         <div>
-          <b-button variant="primary" type="submit">送信確認</b-button>
+          <b-button variant="light" class="mx-2">リセット</b-button>
+        </div>
+        <div>
+          <b-button variant="primary" class="mx-2">送信確認</b-button>
         </div>
       </div>
+      <b-card id="form-confirm" title="この内容でよろしいですか？">
+        <b-card-body>
+        <b-row tag="dl">
+          <b-col tag="dt" md="3">Email</b-col>
+          <b-col tag="dd" md="9">{{ formValue }}</b-col>
+        </b-row>
+        </b-card-body>
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <div><b-button variant="light" class="mx-2">入力画面に戻る</b-button></div>
+          <div><b-button variant="danger" type="submit" class="mx-2">この内容で送信する</b-button></div>
+      </div>
+      </b-card>
     </form>
   </main>
 </template>
@@ -21,6 +35,11 @@ import formData from "form-data";
 const mailgun = new Mailgun(formData);
 
 export default {
+  data(){
+    return {
+      formValue: "",
+    }
+  },
   name: "IndexPage",
   methods: {
     onSubmit(e) {
@@ -33,8 +52,8 @@ export default {
 
       mg.messages
         .create(domain, {
-          from: "Excited User <mailgun@sandbox-123.mailgun.org>",
-          to: [process.env.MAILGUN_FROM_ADDRESS],
+          from: process.env.MAILGUN_FROM_ADDRESS,
+          to: [this.formValue],
           subject: "Hello",
           text: "Testing some Mailgun awesomness!",
           html: "<h1>Testing some Mailgun awesomness!</h1>",
