@@ -6,7 +6,7 @@
     <FmProgress :phase="progressPhase"/>
     <form id="form" method="POST">
       <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
-        <b-alert variant="danger" :show="hasError && phaseValue > phase.input">入力エラーがあります</b-alert>
+        <b-alert variant="danger" :show="errors && phaseValue > phase.input">入力エラーがあります</b-alert>
       <NuxtChild section="form-body" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
       <div class="d-flex flex-row align-items-center justify-content-center mb-5">
         <div>
@@ -19,9 +19,9 @@
       </div><!-- /#form-inputs -->
       <b-card id="form-confirm" title="この内容でよろしいですか？" v-if="phaseValue === phase.confirm">
         <b-card-body>
-        <b-row tag="dl">
-          <b-col tag="dt" md="3">Email</b-col>
-          <b-col tag="dd" md="9">{{ formValue }}</b-col>
+        <b-row tag="dl" v-for="value,key in formValue" :key="key">
+          <b-col tag="dt" md="3">{{ key }} </b-col>
+          <b-col tag="dd" md="9">{{ value }}</b-col>
         </b-row>
         </b-card-body>
       <div class="d-flex flex-row align-items-center justify-content-center">
@@ -57,8 +57,8 @@ export default {
   mixins: [phase],
   data(){
     return {
-      formValue: "",
-      errors: {},
+      formValue: {},
+      errors: 0,
       phase: phase,
       phaseValue: phase.input,
       inReset: false
@@ -79,15 +79,12 @@ export default {
           return 2;
         default:
       }
-    },
-    hasError(){
-      return this.getHasError();
     }
   },
   watch: {
     errors(){
       if(this.phaseValue === this.phase.validate) {
-        this.phaseValue = (this.getHasError()) ? this.phase.hasError :this.phase.confirm;
+        this.phaseValue = (this.errors) ? this.phase.hasError :this.phase.confirm;
       }
     }
   },
@@ -95,19 +92,11 @@ export default {
     onConfirmButtonClicked(e){
       this.phaseValue = this.phase.validate;
     },
-    getHasError(){
-      return (!_.isEmpty(_.keys(this.errors)));
-    },
     onBackButtonClicked(e){
       this.phaseValue = this.phase.input;
     },
     onResetButtonClicked(e){
-      this.phaseValue = this.phase.input;
-      this.formValue = "";
-      this.errors = {};
-      this.inReset = true;
-      var it = this;
-      this.$nextTick(()=> it.inReset = false);
+      this.formInitialise();
     },
     onSent(msg){
       console.log({success:msg});
@@ -116,7 +105,18 @@ export default {
     onSendError(err){
       console.log({error:err});
       this.phaseValue = this.phase.sendError;
+    },
+    formInitialise(){
+      this.phaseValue = this.phase.input;
+      this.formValue = {};
+      this.errors = 0;
+      this.inReset = true;
+      var it = this;
+      this.$nextTick(()=> it.inReset = false);
     }
+  },
+  mounted(){
+    this.formInitialise();
   }
 };
 </script>

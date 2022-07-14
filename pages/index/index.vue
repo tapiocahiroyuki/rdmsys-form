@@ -3,36 +3,45 @@
     <b-alert show variant="secondary">フォームの説明文が表示されます</b-alert>
   </section>
   <section id="form-body" v-else>
-    <b-row class="my-1" tag="dl">
-      <b-col md="3" tag="dt">
-        <label for="email"
-          >メールアドレス<b-badge variant="danger">必須</b-badge></label
-        >
-      </b-col>
-      <b-col md="9" tag="dd">
-        <b-form-input
-          id="email"
-          type="email"
-          v-model="formValue"
-          :state="hasError"
-          placeholder="mailto@address.com"
-          required="required"
-          @input="updateValue"
-        ></b-form-input>
-        <b-form-invalid-feedback id="email">
-          <ul class="list-unstyled">
-            <li v-if="errors.email">メールアドレスが不正です</li>
-            <li v-if="errors.required">入力必須項目です</li>
-          </ul>
-        </b-form-invalid-feedback>
-      </b-col>
-    </b-row>
+    <FmPartsInput
+      type="email"
+      id="email"
+      required="required"
+      label="メールアドレス"
+      name="email"
+      placeholder="mailto@address.com"
+      :formValue.sync="formValue.email"
+      :errors.sync="errors.email"
+      :validate="validate"
+      :inReset="inReset"
+    />
+    <FmPartsInput
+      type="text"
+      id="name"
+      label="お名前"
+      name="yourName"
+      placeholder="例： 佐藤 和夫"
+      :formValue.sync="formValue.name"
+      :errors.sync="errors.name"
+      :validate="validate"
+      :inReset="inReset"
+    />
+    <FmPartsInput
+      type="text"
+      id="content"
+      label="備考"
+      name="content"
+      placeholder="例： 宅配ボックスが利用可能です"
+      required="required"
+      :formValue.sync="formValue.content"
+      :errors.sync="errors.content"
+      :validate="validate"
+      :inReset="inReset"
+    />
   </section>
 </template>
 
 <script>
-import isEmail from "is-email";
-
 export default {
   props: [
     "section",
@@ -42,26 +51,13 @@ export default {
   data() {
     return {
       errors: {},
-      formValue: "",
+      formValue: {},
     };
   },
   computed: {
-    hasError() {
-      if (this.formValue === "" && _.isUndefined(this.errors.required)) return null;
-      return _.isEmpty(_.keys(this.errors));
+    errorsCount() {
+      return this.getErrorsCount();
     },
-  },
-  watch: {
-    validate(){
-      console.log(this.validate);
-      if(this.validate) {
-        this.formValidation();
-      }
-    },
-    inReset(){
-      this.errors = {};
-      this.formValue = "";
-    }
   },
   methods: {
     updateValue() {
@@ -69,12 +65,22 @@ export default {
       this.formValidation();
     },
     formValidation() {
-      var errors = {};
-      if (_.isEmpty(this.formValue)) errors.required = 1;
-      if (!isEmail(this.formValue)) errors.email = 1;
-      this.errors = errors;
-      this.$emit("update:errors", this.errors);
+      this.$emit("update:errors", this.getErrorsCount());
     },
+    getErrorsCount() {
+      return _.filter(_.values(this.errors),function(x){return _.keys(x).length;}).length;
+    },
+  },
+  watch: {
+    validate(){
+      if(this.validate) {
+        var it = this;
+        setTimeout(()=>it.formValidation(),500);
+      }
+    },
+    inReset(){
+      this.errors = {};
+    }
   },
 };
 </script>
