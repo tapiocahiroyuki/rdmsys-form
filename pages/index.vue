@@ -83,13 +83,14 @@ export default {
   },
   watch: {
     errors(){
-      if(this.phaseValue === this.phase.validate) {
-        this.phaseValue = (this.errors) ? this.phase.hasError :this.phase.confirm;
+      if(this.phaseValue === this.phase.validate && !_.isNull(this.errors)) {
+        this.phaseValue = (this.errors != 0) ? this.phase.hasError :this.phase.confirm;
       }
     }
   },
   methods: {
     onConfirmButtonClicked(e){
+      this.errors = null;
       this.phaseValue = this.phase.validate;
     },
     onBackButtonClicked(e){
