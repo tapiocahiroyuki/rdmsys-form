@@ -4,7 +4,7 @@
     <NuxtChild section="before" />
     <p>プライバシーポリシーはこちら</p>
     <FmProgress :phase="progressPhase"/>
-    <form id="form" @submit="onSubmit" method="POST">
+    <form id="form" method="POST">
       <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
         <b-alert variant="danger" :show="hasError && phaseValue > phase.input">入力エラーがあります</b-alert>
       <NuxtChild section="form-body" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
@@ -26,7 +26,7 @@
         </b-card-body>
       <div class="d-flex flex-row align-items-center justify-content-center">
         <div><b-button variant="light" class="mx-2" @click="onBackButtonClicked">入力画面に戻る</b-button></div>
-          <div><b-button variant="danger" type="submit" class="mx-2">この内容で送信する</b-button></div>
+          <FmMailgun :message="formValue" @error="onSendError" @success="onSent" :to="formValue" subject="お問い合わせありがとうございます">この内容で送信する</FmMailgun>
       </div>
       </b-card><!-- /#form-confirm -->
     </form>
@@ -44,8 +44,6 @@
 </template>
 
 <script>
-import Mailgun from "mailgun.js";
-import formData from "form-data";
 const phase = {
   input: 0,
   validate: 1,
@@ -54,8 +52,6 @@ const phase = {
   sendError: 4,
   complete: 5,
 };
-
-const mailgun = new Mailgun(formData);
 
 export default {
   mixins: [phase],
@@ -113,26 +109,14 @@ export default {
       var it = this;
       this.$nextTick(()=> it.inReset = false);
     },
-    onSubmit(e) {
-      e.preventDefault();
-      var mg = mailgun.client({
-        username: "api",
-        key: process.env.MAILGUN_API_KEY,
-      });
-      const domain = process.env.MAILGUN_DOMAIN;
-
-      var it = this;
-      mg.messages
-        .create(domain, {
-          from: process.env.MAILGUN_FROM_ADDRESS,
-          to: [this.formValue],
-          subject: "Hello",
-          text: "Testing some Mailgun awesomness!",
-          html: "<h1>Testing some Mailgun awesomness!</h1>",
-        })
-        .then((msg) => it.phaseValue = it.phase.complete) 
-        .catch((err) => it.phaseValue = it.phase.sendError); 
+    onSent(msg){
+      console.log({success:msg});
+      this.phaseValue = this.phase.complete;
     },
+    onSendError(err){
+      console.log({error:err});
+      this.phaseValue = this.phase.sendError;
+    }
   }
 };
 </script>
