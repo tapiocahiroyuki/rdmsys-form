@@ -48,6 +48,16 @@
       :validate="validate"
       :inReset="inReset"
     />
+    <FmPartsCheckbox
+      id="check"
+      label="軒先への搬入"
+      name="check"
+      :options="['馬車が入れます','魔法のじゅうたんが入れます',{disabled:true,value:'不明',text:'不明'}]"
+      :formValue.sync="formValue.check"
+      :errors.sync="errors.check"
+      :validate="validate"
+      :inReset="inReset"
+    />
     <FmPartsRating
       id="stars"
       label="評価"

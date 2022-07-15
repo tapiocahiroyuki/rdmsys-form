@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     hasError() {
-      if (this.formValue === "" && _.isUndefined(this.errors.required)) return null;
+      if (this.isEmptyFormValue() && _.isUndefined(this.errors.required)) return null;
       return _.isEmpty(_.keys(this.errors));
     },
   },
@@ -34,7 +34,7 @@ export default {
     },
     inReset(){
       this.errors = {};
-      this.formValue = "";
+      this.setInitialFormValue();
       this.$emit("update:formValue", this.formValue);
     }
   },
@@ -45,11 +45,17 @@ export default {
     },
     formValidation() {
       var errors = {};
-      if (this.required && _.isEmpty(this.formValue)) errors.required = 1;
+      if (this.required && this.isEmptyFormValue()) errors.required = 1;
       if (this.type==="email" && !isEmail(this.formValue)) errors.email = 1;
       this.errors = errors;
       this.$emit("update:errors", this.errors);
     },
+    isEmptyFormValue(){
+      return (_.isArray(this.formValue)) ? (this.formValue.length === 0) : _.isEmpty(this.formValue);
+    },
+    setInitialFormValue(){
+      this.formValue = (_.isArray(this.formValue)) ? [] : "";
+    }
   },
 };
 </script>

@@ -21,7 +21,12 @@
         <b-card-body>
           <b-row tag="dl" v-for="(value,key) in formValue" :key="key">
             <b-col tag="dt" md="3">{{ key }} </b-col>
-            <b-col tag="dd" md="9">{{ value }}</b-col>
+            <b-col tag="dd" md="9">
+              <ul v-if="isArray(value)">
+                <li v-for="(item,k) in value" :key="k">{{ item }}</li>
+              </ul>
+              <span v-else>{{ value }}</span>
+            </b-col>
           </b-row>
         </b-card-body>
       <div class="d-flex flex-row align-items-center justify-content-center">
@@ -120,6 +125,9 @@ export default {
       this.inReset = true;
       var it = this;
       this.$nextTick(()=> it.inReset = false);
+    },
+    isArray(value){
+      return _.isArray(value);
     }
   },
   mounted(){
