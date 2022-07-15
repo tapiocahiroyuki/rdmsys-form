@@ -26,8 +26,7 @@
       :validate="validate"
       :inReset="inReset"
     />
-    <FmPartsInput
-      type="text"
+    <FmPartsTextarea
       id="content"
       label="備考"
       name="content"
@@ -35,6 +34,17 @@
       required="required"
       :formValue.sync="formValue.content"
       :errors.sync="errors.content"
+      :validate="validate"
+      :inReset="inReset"
+    />
+    <FmPartsRadio
+      id="experience"
+      label="購入経験"
+      name="experience"
+      required="required"
+      :options="['あり','なし',{disabled:true,value:'不明',text:'忘れた'}]"
+      :formValue.sync="formValue.experience"
+      :errors.sync="errors.experience"
       :validate="validate"
       :inReset="inReset"
     />

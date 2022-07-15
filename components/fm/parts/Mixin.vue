@@ -10,7 +10,9 @@ export default {
     "name",
     "placeholder",
     "validate",
-    "inReset"
+    "inReset",
+    "size",
+    "options"
   ],
   data() {
     return {
