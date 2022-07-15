@@ -75,6 +75,24 @@
       :validate="validate"
       :inReset="inReset"
     />
+    <FmPartsSelect
+      id="select"
+      label="好きな急行停車駅"
+      name="select"
+      required="required"
+      :options="[
+          { value: null, text: '-- お選びください --' },
+          { value: '二子玉川', text: '二子玉川' },
+          { value: '用賀', text: '用賀', disabled: true },
+          { value: '桜新町', text: '桜新町', disabled: true },
+          { value: '駒澤大学', text: '駒澤大学', disabled: true },
+          { value: '三軒茶屋', text: '三軒茶屋' },
+        ]"
+      :formValue.sync="formValue.select"
+      :errors.sync="errors.select"
+      :validate="validate"
+      :inReset="inReset"
+    />
   </section>
 </template>
 
