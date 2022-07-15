@@ -19,14 +19,14 @@
       </div><!-- /#form-inputs -->
       <b-card id="form-confirm" title="この内容でよろしいですか？" v-if="phaseValue === phase.confirm">
         <b-card-body>
-        <b-row tag="dl" v-for="value,key in formValue" :key="key">
-          <b-col tag="dt" md="3">{{ key }} </b-col>
-          <b-col tag="dd" md="9">{{ value }}</b-col>
-        </b-row>
+          <b-row tag="dl" v-for="(value,key) in formValue" :key="key">
+            <b-col tag="dt" md="3">{{ key }} </b-col>
+            <b-col tag="dd" md="9">{{ value }}</b-col>
+          </b-row>
         </b-card-body>
       <div class="d-flex flex-row align-items-center justify-content-center">
         <div><b-button variant="light" class="mx-2" @click="onBackButtonClicked">入力画面に戻る</b-button></div>
-          <FmMailgun :message="formValue" @error="onSendError" @success="onSent" :to="formValue" subject="お問い合わせありがとうございます">この内容で送信する</FmMailgun>
+          <FmMailgun :yourName="formValue.name" @error="onSendError" @success="onSent" :from="formValue.email" subject="お問い合わせありがとうございます" :text="formValue.content" :data="formValueData">この内容で送信する</FmMailgun>
       </div>
       </b-card><!-- /#form-confirm -->
     </form>
@@ -79,6 +79,12 @@ export default {
           return 2;
         default:
       }
+    },
+    formValueData(){
+      return _.omit(this.formValue,[
+        'email',
+        'name'
+      ])
     }
   },
   watch: {

@@ -80,6 +80,9 @@ export default {
     },
     inReset(){
       this.errors = {};
+    },
+    formValue(){
+      this.updateValue();
     }
   },
 };

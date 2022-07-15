@@ -14,9 +14,11 @@ const mailgun = new Mailgun(formData);
 
 export default {
   props: [
-    'message',
-    'to',
-    'subject'
+    'data',
+    'yourName',
+    'subject',
+    'text',
+    'from'
 ],
   methods: {
     sendMail(e) {
@@ -31,14 +33,23 @@ export default {
       mg.messages
         .create(domain, {
             from: process.env.MAILGUN_FROM_ADDRESS,
-            to: [this.to],
+            to: [this.from],
             subject: this.subject || 'Thank You!',
-            template: 'inquiry-rdmsys',
-            'h:X-Mailgun-Variables': JSON.stringify({email:this.message})
+            template: 'inquery-form',
+            'h:X-Mailgun-Variables': JSON.stringify(this.getSendData())
         })
         .then((msg) => it.$emit("success", msg))
         .catch((err) => it.$emit("error", err));
     },
+    getSendData(){
+        return {
+            subject: this.subject,
+            text: this.text,
+            yourName: this.yourName,
+            data: this.data,
+            from: this.from
+        }
+    }
   },
 };
 </script>
