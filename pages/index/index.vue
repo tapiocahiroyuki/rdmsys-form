@@ -48,6 +48,23 @@
       :validate="validate"
       :inReset="inReset"
     />
+    <FmPartsRating
+      id="stars"
+      label="評価"
+      name="stars"
+      required="required"
+      :options="[
+        '不満',
+        'やや不満',
+        '普通',
+        '満足',
+        '大満足'
+      ]"
+      :formValue.sync="formValue.stars"
+      :errors.sync="errors.stars"
+      :validate="validate"
+      :inReset="inReset"
+    />
   </section>
 </template>
 
