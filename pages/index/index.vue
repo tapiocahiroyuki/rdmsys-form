@@ -42,7 +42,11 @@
       label="購入経験"
       name="experience"
       required="required"
-      :options="['あり','なし',{disabled:true,value:'不明',text:'忘れた'}]"
+      :options="[
+        'あり',
+        'なし',
+        { disabled: true, value: '不明', text: '忘れた' },
+      ]"
       :formValue.sync="formValue.experience"
       :errors.sync="errors.experience"
       :validate="validate"
@@ -52,7 +56,11 @@
       id="check"
       label="軒先への搬入"
       name="check"
-      :options="['馬車が入れます','魔法のじゅうたんが入れます',{disabled:true,value:'不明',text:'不明'}]"
+      :options="[
+        '馬車が入れます',
+        '魔法のじゅうたんが入れます',
+        { disabled: true, value: '不明', text: '不明' },
+      ]"
       :formValue.sync="formValue.check"
       :errors.sync="errors.check"
       :validate="validate"
@@ -63,13 +71,7 @@
       label="評価"
       name="stars"
       required="required"
-      :options="[
-        '不満',
-        'やや不満',
-        '普通',
-        '満足',
-        '大満足'
-      ]"
+      :options="['不満', 'やや不満', '普通', '満足', '大満足']"
       :formValue.sync="formValue.stars"
       :errors.sync="errors.stars"
       :validate="validate"
@@ -81,32 +83,39 @@
       name="select"
       required="required"
       :options="[
-          { value: null, text: '-- お選びください --' },
-          { value: '二子玉川', text: '二子玉川' },
-          { value: '用賀', text: '用賀', disabled: true },
-          { value: '桜新町', text: '桜新町', disabled: true },
-          { value: '駒澤大学', text: '駒澤大学', disabled: true },
-          { value: '三軒茶屋', text: '三軒茶屋' },
-        ]"
+        { value: null, text: '-- お選びください --' },
+        { value: '二子玉川', text: '二子玉川' },
+        { value: '用賀', text: '用賀', disabled: true },
+        { value: '桜新町', text: '桜新町', disabled: true },
+        { value: '駒澤大学', text: '駒澤大学', disabled: true },
+        { value: '三軒茶屋', text: '三軒茶屋' },
+      ]"
       :formValue.sync="formValue.select"
       :errors.sync="errors.select"
       :validate="validate"
       :inReset="inReset"
+    />
+    <FmPartsFile
+      id="file"
+      label="ファイル送信"
+      name="file"
+      required="required"
+      :formValue.sync="formValue.file"
+      :errors.sync="errors.file"
+      :validate="validate"
+      :inReset="inReset"
+      accept=".jpg, .png, .gif, .pdf"
     />
   </section>
 </template>
 
 <script>
 export default {
-  props: [
-    "section",
-    "validate",
-    "inReset"
-  ],
+  props: ["section", "validate", "inReset"],
   data() {
     return {
       errors: {},
-      formValue: {},
+      formValue: {}
     };
   },
   computed: {
@@ -123,22 +132,24 @@ export default {
       this.$emit("update:errors", this.getErrorsCount());
     },
     getErrorsCount() {
-      return _.filter(_.values(this.errors),function(x){return _.keys(x).length;}).length;
+      return _.filter(_.values(this.errors), function (x) {
+        return _.keys(x).length;
+      }).length;
     },
   },
   watch: {
-    validate(){
-      if(this.validate) {
+    validate() {
+      if (this.validate) {
         var it = this;
-        setTimeout(()=>it.formValidation(),500);
+        setTimeout(() => it.formValidation(), 500);
       }
     },
-    inReset(){
+    inReset() {
       this.errors = {};
     },
-    formValue(){
+    formValue() {
       this.updateValue();
-    }
+    },
   },
 };
 </script>

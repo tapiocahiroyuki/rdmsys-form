@@ -23,7 +23,7 @@
             <b-col tag="dt" md="3">{{ key }} </b-col>
             <b-col tag="dd" md="9">
               <ul v-if="isArray(value)">
-                <li v-for="(item,k) in value" :key="k">{{ item }}</li>
+                <li v-for="(item,k) in value" :key="k">{{ (typeof item === 'object')? item.name : item }}</li>
               </ul>
               <span v-else>{{ value }}</span>
             </b-col>
