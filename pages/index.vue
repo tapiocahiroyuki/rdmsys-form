@@ -20,7 +20,7 @@
       <b-card id="form-confirm" title="この内容でよろしいですか？" v-if="phaseValue === phase.confirm">
         <b-card-body>
           <b-row tag="dl" v-for="(value,key) in formValue" :key="key">
-            <b-col tag="dt" md="3">{{ key }} </b-col>
+            <b-col tag="dt" md="3">{{ formPartsName[key] }} </b-col>
             <b-col tag="dd" md="9">
               <ul v-if="isArray(value)">
                 <li v-for="(item,k) in value" :key="k">{{ (typeof item === 'object')? item.name : item }}</li>
@@ -88,12 +88,17 @@ export default {
         default:
       }
     },
+    formPartsName(){
+      return this.getFormPartsNames();
+    },
     formValueData(){
-      return _.omit(this.formValue,[
-        'email',
-        'name'
-      ])
-    }
+      var obj = {};
+      var lookup = this.getFormPartsNames();
+      _.forEach(this.formValue,function(value,key){
+        obj[lookup[key]]=value;
+      });
+      return obj;
+    },
   },
   watch: {
     errors(){
@@ -131,6 +136,11 @@ export default {
     },
     isArray(value){
       return _.isArray(value);
+    },
+    getFormPartsNames(){
+      var obj = {};
+      _.forEach(this.formParts,function(value){obj[value.id]=value.name;});
+      return obj;
     }
   },
   mounted(){

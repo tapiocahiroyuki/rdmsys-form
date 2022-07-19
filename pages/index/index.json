@@ -5,7 +5,7 @@
         "id": "email",
         "required": "required",
         "label": "メールアドレス",
-        "name": "email",
+        "name": "メールアドレス",
         "placeholder": "mailto@address.com"
     },
     {
@@ -13,14 +13,14 @@
         "type": "text",
         "id": "name",
         "label": "お名前",
-        "name": "yourName",
+        "name": "名前",
         "placeholder": "例： 佐藤 和夫"
     },
     {
         "is": "Textarea",
         "id": "content",
         "label": "備考",
-        "name": "content",
+        "name": "備考",
         "placeholder": "例： 宅配ボックスが利用可能です",
         "required": "required"
     },
@@ -28,7 +28,7 @@
         "is": "Radio",
         "id": "experience",
         "label": "購入経験",
-        "name": "experience",
+        "name": "購入経験",
         "required": "required",
         "options": [
             "あり",
@@ -44,7 +44,7 @@
         "is": "Checkbox",
         "id": "check",
         "label": "軒先への搬入",
-        "name": "check",
+        "name": "軒先への搬入",
         "options": [
             "馬車が入れます",
             "魔法のじゅうたんが入れます",
@@ -59,7 +59,7 @@
         "is": "Rating",
         "id": "stars",
         "label": "評価",
-        "name": "stars",
+        "name": "評価",
         "required": "required",
         "options": [
             "不満",
@@ -73,7 +73,7 @@
         "is": "Select",
         "id": "select",
         "label": "好きな急行停車駅",
-        "name": "select",
+        "name": "好きな急行停車駅",
         "required": "required",
         "options": [
             {
@@ -109,7 +109,7 @@
         "is": "File",
         "id": "file",
         "label": "ファイル送信",
-        "name": "file",
+        "name": "ファイル",
         "required": "required",
         "accept": ".jpg, .png, .gif, .pdf"
     }
