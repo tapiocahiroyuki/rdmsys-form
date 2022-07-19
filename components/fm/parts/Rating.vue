@@ -10,7 +10,6 @@
       @input="updateValue"
       :stars="options.length"
     ></b-form-rating>
-    <p class="mt-2">Value: {{ formValue }}</p>
   </FmPartsBase>
 </template>
 

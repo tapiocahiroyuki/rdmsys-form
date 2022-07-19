@@ -19,7 +19,6 @@
       >
       </b-form-checkbox-group>
     </b-form-group>
-    <div>Selected: <strong>{{ formValue }}</strong></div>
   </FmPartsBase>
 </template>
 
