@@ -1,0 +1,116 @@
+[
+    {
+        "is": "Input",
+        "type": "email",
+        "id": "email",
+        "required": "required",
+        "label": "メールアドレス",
+        "name": "email",
+        "placeholder": "mailto@address.com"
+    },
+    {
+        "is": "Input",
+        "type": "text",
+        "id": "name",
+        "label": "お名前",
+        "name": "yourName",
+        "placeholder": "例： 佐藤 和夫"
+    },
+    {
+        "is": "Textarea",
+        "id": "content",
+        "label": "備考",
+        "name": "content",
+        "placeholder": "例： 宅配ボックスが利用可能です",
+        "required": "required"
+    },
+    {
+        "is": "Radio",
+        "id": "experience",
+        "label": "購入経験",
+        "name": "experience",
+        "required": "required",
+        "options": [
+            "あり",
+            "なし",
+            {
+                "disabled": true,
+                "value": "不明",
+                "text": "忘れた"
+            }
+        ]
+    },
+    {
+        "is": "Checkbox",
+        "id": "check",
+        "label": "軒先への搬入",
+        "name": "check",
+        "options": [
+            "馬車が入れます",
+            "魔法のじゅうたんが入れます",
+            {
+                "disabled": true,
+                "value": "不明",
+                "text": "不明"
+            }
+        ]
+    },
+    {
+        "is": "Rating",
+        "id": "stars",
+        "label": "評価",
+        "name": "stars",
+        "required": "required",
+        "options": [
+            "不満",
+            "やや不満",
+            "普通",
+            "満足",
+            "大満足"
+        ]
+    },
+    {
+        "is": "Select",
+        "id": "select",
+        "label": "好きな急行停車駅",
+        "name": "select",
+        "required": "required",
+        "options": [
+            {
+                "value": null,
+                "text": "-- お選びください --"
+            },
+            {
+                "value": "二子玉川",
+                "text": "二子玉川"
+            },
+            {
+                "value": "用賀",
+                "text": "用賀",
+                "disabled": true
+            },
+            {
+                "value": "桜新町",
+                "text": "桜新町",
+                "disabled": true
+            },
+            {
+                "value": "駒澤大学",
+                "text": "駒澤大学",
+                "disabled": true
+            },
+            {
+                "value": "三軒茶屋",
+                "text": "三軒茶屋"
+            }
+        ]
+    },
+    {
+        "is": "File",
+        "id": "file",
+        "label": "ファイル送信",
+        "name": "file",
+        "required": "required",
+        "accept": ".jpg, .png, .gif, .pdf"
+    }
+]

@@ -1,13 +1,13 @@
  <template>
   <main>
     <h1 class="text-center">問い合わせフォーム</h1>
-    <NuxtChild section="before" />
+    <NuxtChild />
     <p>プライバシーポリシーはこちら</p>
     <FmProgress :phase="progressPhase"/>
     <form id="form" method="POST">
       <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
         <b-alert variant="danger" :show="errors && phaseValue > phase.input">入力エラーがあります</b-alert>
-      <NuxtChild section="form-body" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
+      <FmBody :formParts="formParts" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
       <div class="d-flex flex-row align-items-center justify-content-center mb-5">
         <div>
           <b-button variant="light" type="reset" class="mx-2" @click="onResetButtonClicked">リセット</b-button>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import formParts from '../pages/index/index.json';
+
 const phase = {
   input: 0,
   validate: 1,
@@ -64,6 +66,7 @@ export default {
     return {
       formValue: {},
       errors: 0,
+      formParts: formParts,
       phase: phase,
       phaseValue: phase.input,
       inReset: false
