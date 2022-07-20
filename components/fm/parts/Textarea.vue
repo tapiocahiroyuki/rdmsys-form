@@ -8,6 +8,7 @@
       :required="required || null"
       @input="updateValue"
       :size="size || 'md'"
+      rows="5"
     ></b-form-textarea>
   </FmPartsBase>
 </template>
