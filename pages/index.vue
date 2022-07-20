@@ -1,8 +1,8 @@
  <template>
   <main>
-    <h1 class="text-center">問い合わせフォーム</h1>
+    <h1 class="text-center mb-5">問い合わせフォーム</h1>
     <NuxtChild />
-    <p>プライバシーポリシーはこちら</p>
+    <b-alert show variant="light" class="text-center">プライバシーポリシーはこちら</b-alert>
     <FmProgress :phase="progressPhase"/>
     <form id="form" method="POST">
       <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
