@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       errors: {},
-      formValue: "",
+      formValue: null
     };
   },
   computed: {
@@ -46,7 +46,7 @@ export default {
     formValidation() {
       var errors = {};
       if (this.required && this.isEmptyFormValue()) errors.required = 1;
-      if (this.type==="email" && !isEmail(this.formValue)) errors.email = 1;
+      if (this.type==="email" && !isEmail(this.formValue||"")) errors.email = 1;
       this.errors = errors;
       this.$emit("update:errors", this.errors);
     },
@@ -54,7 +54,7 @@ export default {
       return (_.isArray(this.formValue)) ? (this.formValue.length === 0) : _.isEmpty(this.formValue);
     },
     setInitialFormValue(){
-      this.formValue = (_.isArray(this.formValue)) ? [] : "";
+      this.formValue = (_.isArray(this.formValue)) ? [] : null;
     }
   },
 };
