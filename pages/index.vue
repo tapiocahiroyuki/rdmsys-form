@@ -31,7 +31,7 @@
         </b-card-body>
       <div class="d-flex flex-row align-items-center justify-content-center">
         <div><b-button variant="light" class="mx-2" @click="onBackButtonClicked">入力画面に戻る</b-button></div>
-          <FmMailgun :yourName="formValue.name" @error="onSendError" @success="onSent" :from="formValue.email" subject="お問い合わせありがとうございます" :text="formValue.content" :data="formValueData">この内容で送信する</FmMailgun>
+          <FmSend :yourName="formValue.name" @error="onSendError" @success="onSent" :from="formValue.email" subject="お問い合わせありがとうございます" :text="formValue.content" :data="formValueData">この内容で送信する</FmSend>
       </div>
       </b-card><!-- /#form-confirm -->
     </form>
