@@ -1,5 +1,115 @@
 [
     {
+        "is": "Radio",
+        "id": "category",
+        "label": "問い合わせの種別",
+        "name": "カテゴリ",
+        "required": "required",
+        "options": [
+            "サイトの内容に関する問い合わせ",
+            "サイトの不具合に関する問い合わせ",
+            "サイト管理者に関する問い合わせ",
+            "その他"
+        ]
+    },
+    {
+        "is": "Textarea",
+        "id": "content",
+        "label": "内容",
+        "name": "内容",
+        "placeholder": "送信内容を記載してください。",
+        "required": "required"
+    },
+    {
+        "is": "Checkbox",
+        "id": "reference",
+        "label": "このサイトを知ったきっかけ",
+        "name": "参照",
+        "options": [
+            "Google/Yahoo!検索　",
+            "その他のサーチエンジンによる検索　",
+            "SNS（Twitter / Instagram / Facebook など公衆に発信するタイプのもの）　",
+            "SNS（LINE / Viber などの個々を対象としたもの）　",
+            "Red Magic SystemsのBlog ",
+            "その他のBlog ",
+            "その他"
+        ]
+    },
+    {
+        "is": "Rating",
+        "id": "stars",
+        "label": "評価",
+        "name": "評価",
+        "required": "required",
+        "options": [
+            "不満（★☆☆☆☆）",
+            "やや不満（★★☆☆☆）",
+            "普通（★★★☆☆）",
+            "満足（★★★★☆）",
+            "大満足（★★★★★）"
+        ]
+    },
+    {
+        "is": "Select",
+        "id": "area",
+        "label": "お住まいの地域",
+        "name": "地域",
+        "required": "required",
+        "options": [
+            {
+                "value": null,
+                "text": "-- お選びください --"
+            },
+            {
+                "value": "北海道",
+                "text": "北海道"
+            },
+            {
+                "value": "東北",
+                "text": "東北"
+            },
+            {
+                "value": "関東",
+                "text": "関東"
+            },
+            {
+                "value": "中部",
+                "text": "中部"
+            },
+            {
+                "value": "近畿",
+                "text": "近畿"
+            },
+            {
+                "value": "四国",
+                "text": "四国"
+            },
+            {
+                "value": "中国",
+                "text": "中国"
+            },
+            {
+                "value": "九州",
+                "text": "九州"
+            },
+            {
+                "value": "沖縄",
+                "text": "沖縄"
+            },
+            {
+                "value": "外国（overseas）",
+                "text": "日本国以外の地域（overseas）"
+            }
+        ]
+    },
+    {
+        "is": "File",
+        "id": "file",
+        "label": "画像送信",
+        "name": "ファイル",
+        "accept": ".jpg, .png, .gif, .pdf"
+    },
+    {
         "is": "Input",
         "type": "email",
         "id": "email",
@@ -15,102 +125,5 @@
         "label": "お名前",
         "name": "名前",
         "placeholder": "例： 佐藤 和夫"
-    },
-    {
-        "is": "Textarea",
-        "id": "content",
-        "label": "備考",
-        "name": "備考",
-        "placeholder": "例： 宅配ボックスが利用可能です",
-        "required": "required"
-    },
-    {
-        "is": "Radio",
-        "id": "experience",
-        "label": "購入経験",
-        "name": "購入経験",
-        "required": "required",
-        "options": [
-            "あり",
-            "なし",
-            {
-                "disabled": true,
-                "value": "不明",
-                "text": "忘れた"
-            }
-        ]
-    },
-    {
-        "is": "Checkbox",
-        "id": "check",
-        "label": "軒先への搬入",
-        "name": "軒先への搬入",
-        "options": [
-            "馬車が入れます",
-            "魔法のじゅうたんが入れます",
-            {
-                "disabled": true,
-                "value": "不明",
-                "text": "不明"
-            }
-        ]
-    },
-    {
-        "is": "Rating",
-        "id": "stars",
-        "label": "評価",
-        "name": "評価",
-        "required": "required",
-        "options": [
-            "不満",
-            "やや不満",
-            "普通",
-            "満足",
-            "大満足"
-        ]
-    },
-    {
-        "is": "Select",
-        "id": "select",
-        "label": "好きな急行停車駅",
-        "name": "好きな急行停車駅",
-        "required": "required",
-        "options": [
-            {
-                "value": null,
-                "text": "-- お選びください --"
-            },
-            {
-                "value": "二子玉川",
-                "text": "二子玉川"
-            },
-            {
-                "value": "用賀",
-                "text": "用賀",
-                "disabled": true
-            },
-            {
-                "value": "桜新町",
-                "text": "桜新町",
-                "disabled": true
-            },
-            {
-                "value": "駒澤大学",
-                "text": "駒澤大学",
-                "disabled": true
-            },
-            {
-                "value": "三軒茶屋",
-                "text": "三軒茶屋"
-            }
-        ]
-    },
-    {
-        "is": "File",
-        "id": "file",
-        "label": "ファイル送信",
-        "name": "ファイル",
-        "required": "required",
-        "accept": ".jpg, .png, .gif, .pdf"
     }
 ]
