@@ -6,7 +6,7 @@
     <FmProgress :phase="progressPhase"/>
     <form id="form" method="POST">
       <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
-        <b-alert variant="danger" :show="errors && phaseValue > phase.input">入力エラーがあります</b-alert>
+        <b-alert id="errorMsg" variant="danger" :show="errors && phaseValue > phase.input">入力エラーがあります</b-alert>
       <FmBody :formParts="formParts" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
       <div class="d-flex flex-row align-items-center justify-content-center mb-5">
         <div>
@@ -103,7 +103,12 @@ export default {
   watch: {
     errors(){
       if(this.phaseValue === this.phase.validate && !_.isNull(this.errors)) {
-        this.phaseValue = (this.errors != 0) ? this.phase.hasError :this.phase.confirm;
+        if(this.errors != 0){
+          this.phaseValue = this.phase.hasError;
+          this.scrollToErrorMsg();
+        } else {
+          this.phaseValue = this.phase.confirm;
+        }
       }
     }
   },
@@ -141,6 +146,9 @@ export default {
       var obj = {};
       _.forEach(this.formParts,function(value){obj[value.id]=value.name;});
       return obj;
+    },
+    scrollToErrorMsg(){
+      document.location.href="#form";
     }
   },
   mounted(){
