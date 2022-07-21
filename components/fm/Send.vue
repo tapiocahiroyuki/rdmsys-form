@@ -1,4 +1,5 @@
 <template>
+  <!--送信ボタンを表示する。クリックされると管理者側へメールが送信される-->
     <b-button
       v-if="phase === condition.waitForSend"
       variant="danger"
@@ -7,6 +8,7 @@
     >
       <slot />
     </b-button>
+    <!--管理者側へメールを送信する。成功したら顧客へメールのカーボンコピーを送信するフェーズへ移行する-->
     <FmMailgun
       v-else-if="phase === condition.sendToOperator && show"
       :from="from"
@@ -17,6 +19,7 @@
       :data="data"
     ><b-button disabled variant="warning"><b-spinner label="管理者側へ送信中" small></b-spinner></b-button>
     </FmMailgun>
+    <!--顧客へメールのカーボンコピーを送信する-->
     <FmMailgun
       v-else-if="phase === condition.sendToClient && show"
       :to="from"
@@ -31,20 +34,28 @@
 </template>
 
 <script>
+/*global _ */
+// メール送信処理フェーズを定義する定数
 const phase = {
-  waitForSend: 0,
-  sendToOperator: 1,
-  sendToClient: 2,
+  waitForSend: 0, // 送信ボタンが表示される状態
+  sendToOperator: 1, // 管理者へ送信中
+  sendToClient: 2, // 顧客へ送信中
 };
 
 export default {
-  props: ["yourName", "from", "text", "data", "subject"],
+  props: [
+    "yourName",
+    "from",
+    "text",
+    "data",
+    "subject"
+  ],
   data() {
     return {
-      condition: phase,
-      phase: phase.waitForSend,
-      msg: [],
-      show: true
+      condition: phase, // テンプレート節でphase定数を利用するため
+      phase: phase.waitForSend, // 処理フェーズを管理する
+      msg: [], // APIが返すメッセージを格納するための値
+      show: true // 子コンポーネントを点滅させるためのフラグ
     };
   },
   computed: {
@@ -87,15 +98,15 @@ export default {
     },
     // 一旦Mailgunコンポーネントを隠し、再表示
     flash(){
-        this.show = false
+        this.show = false;
         this.$nextTick(() => {
-          this.show = true
-        })
+          this.show = true;
+        });
     },
     // 送信エラーが発生した場合の処理を行う
     onError(err) {
       // 送信エラーメッセージとフェーズを記録する
-      this.recordMessage(msg, true);
+      this.recordMessage(err, true);
       // 親コンポーネントにエラーイベントを発行する
       this.$emit("error", this.msg);
     },
@@ -104,7 +115,7 @@ export default {
       var log = {};
       // 送信成功したらキーはsuccess。エラーであればキーをerrorに替えてメッセージを記録する
       log[errorFlag ? "error" : "success"] = msg;
-      // フェーズを記録する
+      // フェーズの名前を記録する
       log.phase = this.phaseText;
       this.msg.push(log);
       console.log(log);

@@ -49,31 +49,41 @@
 </template>
 
 <script>
+/*global _ */
+// フォームの入力項目の構成を記載したJSONファイルを読み込む
 import formParts from '../pages/index/index.json';
 
+// 入力から送信までのフェーズを示す定数
 const phase = {
-  input: 0,
-  validate: 1,
-  hasError: 2,
-  confirm: 3,
-  sendError: 4,
-  complete: 5,
+  input: 0, // フォーム入力中
+  validate: 1, // 全体のフォームバリデーション実行中
+  hasError: 2, // 入力エラーが見つかり、エラーメッセージが表示されている状態
+  confirm: 3, // 送信前確認の画面表示中
+  sendError: 4, // 送信した結果エラーが発生した状態
+  complete: 5, // 送信に成功した状態
 };
 
+
 export default {
-  mixins: [phase],
   data(){
     return {
+      // フォームに入力された値を管理する
       formValue: {},
-      errors: 0,
-      formParts: formParts,
+      // エラーが発生している入力項目を管理する
+      errors: 0, 
+      // フォームの入力項目の構成を記載したJSONファイルが読み込まれる
+      formParts: formParts, 
+      // template節でphase定数を扱うのに必要
       phase: phase,
+      // 入力フェーズを管理する
       phaseValue: phase.input,
+      // リセットボタンが押されるとtrueとなり、それを検知した子コンポーネントはプロパティを初期化する
       inReset: false
     }
   },
   name: "IndexPage",
   computed: {
+    // フェーズによってプログレスバーの赤い部分を塗る場所を示す
     progressPhase() {
       switch (this.phaseValue) {
         case phase.input:
@@ -88,9 +98,11 @@ export default {
         default:
       }
     },
+    // フォーム入力項目に対して、フォームのname属性を引くための配列を生成する
     formPartsName(){
       return this.getFormPartsNames();
     },
+    // フォームの名前と入力値の組み合わせの配列を生成する
     formValueData(){
       var obj = {};
       var lookup = this.getFormPartsNames();
@@ -102,56 +114,80 @@ export default {
   },
   watch: {
     errors(){
+      // フォーム全体のバリデーションを行い、errorsの値がnullから別の値に更新された場合
       if(this.phaseValue === this.phase.validate && !_.isNull(this.errors)) {
         if(this.errors != 0){
+        // エラーがある場合
           this.phaseValue = this.phase.hasError;
+          // スクロールを「入力エラーがあります」の部分に移動する
           this.scrollToErrorMsg();
         } else {
+          // エラーがない場合
           this.phaseValue = this.phase.confirm;
         }
       }
     }
   },
   methods: {
+    // 「送信確認」ボタンを押下した時の処理
     onConfirmButtonClicked(e){
+      // エラーをnullに設定することで、エラーの数にかかわらず$watchで検知されるようにする
       this.errors = null;
+      // フォーム全体のバリデーションフェーズに移行する
       this.phaseValue = this.phase.validate;
     },
+    // 「入力に戻る」ボタンを押下した場合の処理
     onBackButtonClicked(e){
+      // 入力フェーズに戻す
       this.phaseValue = this.phase.input;
     },
+    // リセットボタンを押下した場合の処理
     onResetButtonClicked(e){
+      // フォームの初期化処理を行う
       this.formInitialise();
     },
+    // 送信成功した場合の処理
     onSent(msg){
       console.log({success:msg});
+      // 送信完了フェーズに移行し、送信成功画面を表示させる
       this.phaseValue = this.phase.complete;
     },
+    // 送信に失敗した場合の処理
     onSendError(err){
       console.log({error:err});
+      // 送信エラーフェーズに移行し、エラー表示を行う
       this.phaseValue = this.phase.sendError;
     },
+    // フォームの初期化処理
     formInitialise(){
+      // フォームの値を初期化する
       this.phaseValue = this.phase.input;
       this.formValue = {};
       this.errors = 0;
+      
+      // フラグをtrueに設定し、子コンポーネントの初期化を行わせる
       this.inReset = true;
       var it = this;
+      // 画面が更新されたら、子コンポーネントの初期化中フラグをfalseに戻す
       this.$nextTick(()=> it.inReset = false);
     },
+    // lodashが使えないtemplate節で使う関数
     isArray(value){
       return _.isArray(value);
     },
+    // フォームのパーツのid属性からname属性を引くための辞書を配列で用意する
     getFormPartsNames(){
       var obj = {};
-      _.forEach(this.formParts,function(value){obj[value.id]=value.name;});
+        _.forEach(this.formParts,function(value){obj[value.id]=value.name;});
       return obj;
     },
+    // エラーが発生した場合、スクロールをフォームのトップに戻す処理を行う
     scrollToErrorMsg(){
       document.location.href="#form";
     }
   },
   mounted(){
+    // 読み込みがかかった場合、子コンポーネントの初期化をさせる
     this.formInitialise();
   }
 };

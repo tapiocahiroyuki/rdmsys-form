@@ -7,7 +7,9 @@
 </template>
 
 <script>
+// プログレスバーを表示させる
 export default {
+    // 処理フェーズの値を受け取る
     props: ['phase'],
     data(){
         return {
