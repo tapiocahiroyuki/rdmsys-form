@@ -80,6 +80,11 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
   ],
+  // bootstrapVue: https://bootstrap-vue.org/docs/#nuxtjs-module
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

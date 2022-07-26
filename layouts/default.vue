@@ -10,3 +10,7 @@
   </div>
 </template>
 
+<style lang="scss">
+@import "./css/custom.scss";
+</style>
+
