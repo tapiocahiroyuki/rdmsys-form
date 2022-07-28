@@ -56,6 +56,13 @@ export default {
       {rel:"icon",type:"image/png",sizes:"24x24",href:"/favicons/icon-24x24.png"},
       {rel:"icon",type:"image/png",sizes:"32x32",href:"/favicons/icon-32x32.png"},
       {rel:"manifest",href:"/favicons/manifest.json"}
+    ],
+    script:[
+      {
+        type: "text/javascript",
+        src: `https://webfont.fontplus.jp/accessor/script/fontplus.js?${process.env.FONTPLUS_URL_PARAM}`
+        ,charset:"utf-8"
+      }
     ]
   },
 
@@ -99,6 +106,7 @@ export default {
   env: {
     MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
     MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
-    MAILGUN_FROM_ADDRESS: process.env.MAILGUN_FROM_ADDRESS
+    MAILGUN_FROM_ADDRESS: process.env.MAILGUN_FROM_ADDRESS,
+    FONTPLUS_URL_PARAM: process.env.FONTPLUS_URL_PARAM
   }
 }
