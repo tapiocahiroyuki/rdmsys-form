@@ -1,0 +1,100 @@
+// Bootstrapで利用する値を上書きします。
+// これによりテーマ/スタイルをカスタマイズすることができます。
+
+$white: hsl(0, 0%, 100%);
+$gray-100: hsl(345, 1%, 97%);
+$gray-200: hsl(345, 2%, 92%);
+$gray-300: hsl(345, 3%, 86%);
+$gray-400: hsl(345, 4%, 73%);
+$gray-500: hsl(345, 5%, 64%);
+$gray-600: hsl(345, 6%, 53%);
+$gray-700: hsl(345, 7%, 42%);
+$gray-800: rgb(77, 66, 69);
+$gray-900: rgb(44, 37, 39);
+$black: hsl(0, 0%, 0%);
+
+$grays: (
+);
+$grays: map-merge(("100": $gray-100,
+      "200": $gray-200,
+      "300": $gray-300,
+      "400": $gray-400,
+      "500": $gray-500,
+      "600": $gray-600,
+      "700": $gray-700,
+      "800": $gray-800,
+      "900": $gray-900 ),
+    $grays);
+
+
+$red: #cc0033;
+$orange: #e84707;
+$yellow: #ffd105;
+$yellowish-green: #87c90c;
+$green: #28a018;
+$teal: #18c488;
+$cyan: #31cec6;
+$blue: #128cff;
+$purple: #8842c2;
+$pink: #e740da;
+
+$beige: #cc9966;
+
+$colors: (
+);
+$colors: map-merge(("blue": $blue,
+      "yellowish-green": $yellowish-green,
+      "purple": $purple,
+      "pink": $pink,
+      "red": $red,
+      "orange": $orange,
+      "yellow": $yellow,
+      "green": $green,
+      "teal": $teal,
+      "cyan": $cyan,
+      "white": $white,
+      "gray": $gray-700,
+      "gray-dark": $gray-800 ),
+    $colors);
+
+$primary: $red;
+$secondary: $beige;
+$success: $green;
+$info: $teal;
+$warning: $yellow;
+$danger: $orange;
+$light: $gray-200;
+$dark: $gray-700;
+
+$theme-colors: (
+);
+$theme-colors: map-merge(("primary": $primary,
+      "secondary": $secondary,
+      "success": $success,
+      "info": $info,
+      "warning": $warning,
+      "danger": $danger,
+      "light": $light,
+      "dark": $dark ),
+    $theme-colors);
+
+$enable-shadows:                              true;
+$enable-responsive-font-sizes:                true;
+
+$spacers: map-merge(
+  (
+    6: ($spacer * 4)
+  ),
+  $spacers
+);
+
+$font-size-base: 1rem;
+$font-weight-base: $font-weight-light;
+$body-color:                $gray-800;
+$link-color:                              theme-color("primary");
+$link-decoration:                         underline;
+$link-hover-color:                        darken($link-color, 15%);
+$link-hover-decoration:                   none;
+
+@import './custom-font-style.scss';
+

@@ -1,0 +1,25 @@
+// mixin font-weight
+// font-weightの100〜900に、UD角ゴ_スモールの各ウェイトを割り当てます。
+
+$font-weights: (
+);
+$font-weights: map-merge((900: "U",
+            800: "E",
+            700: "B",
+            600: "DB",
+            500: "M",
+            400: "R",
+            300: "L",
+            200: "EU",
+            100: "UL"
+        ),
+        $font-weights);
+
+@mixin font-weight($weight: 400,$important: false) {
+    $text-important: '';
+    @if($important){$text-important: '!important';}
+
+    $value: map-get($font-weights, $weight);
+    font-family: 'UDKakugo_SmallPr6-#{$value}' #{$text-important};
+    font-weight: $weight #{$text-important};
+}
