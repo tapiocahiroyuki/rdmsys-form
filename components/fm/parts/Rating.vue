@@ -2,6 +2,8 @@
   <FmPartsBase :label="label" :required="required" :id="id" :errors="errors">
     <b-form-rating
       variant="warning"
+      size="lg"
+      class="rdm-form-stars"
       :id="id"
       :type="type"
       v-model="star"
@@ -33,3 +35,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.rdm-form-stars{
+  justify-content: center;
+  border: 0 !important;
+  box-shadow: none;
+  > .b-rating-star {
+    flex-grow: 0 !important;
+  }
+  .b-rating-icon{
+    width: 64px;
+    height: 64px;
+    align-items: center;
+    justify-content: center;
+    > svg{
+      width: 48px;
+      height: 48px;
+    }
+  }
+}
+</style>

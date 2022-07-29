@@ -1,57 +1,145 @@
  <template>
   <main>
-    <h1 class="text-center mb-5">問い合わせフォーム</h1>
+    <ModulesH1>お問い合わせフォーム</ModulesH1>
     <NuxtChild />
-    <b-alert show variant="light" class="text-center">プライバシーポリシーはこちら</b-alert>
-    <FmProgress :phase="progressPhase"/>
-    <form id="form" method="POST">
-      <div id="form-inputs" :class="(phaseValue < phase.confirm)?'d-block':'d-none'">
-        <b-alert id="errorMsg" variant="danger" :show="errors && phaseValue > phase.input">入力エラーがあります</b-alert>
-      <FmBody :formParts="formParts" v-bind:formValue.sync="formValue" v-bind:errors.sync="errors" :validate="phaseValue === phase.validate" :inReset="inReset" />
-      <div class="d-flex flex-row align-items-center justify-content-center mb-5">
-        <div>
-          <b-button variant="light" type="reset" class="mx-2" @click="onResetButtonClicked">リセット</b-button>
-        </div>
-        <div>
-          <b-button variant="primary" class="mx-2" @click="onConfirmButtonClicked">送信確認</b-button>
+    <div class="privacy mb-4">
+      <p class="privacy-p text-right">
+        <NuxtLink to="#">プライバシーポリシー</NuxtLink>はこちら
+      </p>
+    </div>
+    <FmProgress :phase="progressPhase" />
+    <form id="form" method="POST" class="rdm-form">
+      <div
+        id="form-inputs"
+        :class="phaseValue < phase.confirm ? 'd-block' : 'd-none'"
+      >
+        <b-alert
+          id="errorMsg"
+          variant="danger"
+          :show="errors && phaseValue > phase.input"
+          >入力エラーがあります</b-alert
+        >
+        <FmBody
+          :formParts="formParts"
+          v-bind:formValue.sync="formValue"
+          v-bind:errors.sync="errors"
+          :validate="phaseValue === phase.validate"
+          :inReset="inReset"
+        />
+        <div
+          class="d-flex flex-row align-items-center justify-content-center mb-3"
+        >
+          <div>
+            <b-button
+              variant="outline-dark"
+              type="reset"
+              class="mx-2"
+              @click="onResetButtonClicked"
+              size="lg"
+              >リセット</b-button
+            >
+          </div>
+          <div>
+            <b-button
+              variant="info"
+              class="mx-2"
+              @click="onConfirmButtonClicked"
+              size="lg"
+              >送信確認</b-button
+            >
+          </div>
         </div>
       </div>
-      </div><!-- /#form-inputs -->
-      <b-card id="form-confirm" title="この内容でよろしいですか？" v-if="phaseValue === phase.confirm">
-        <b-card-body>
-          <b-row tag="dl" v-for="(value,key) in formValue" :key="key">
-            <b-col tag="dt" md="3">{{ formPartsName[key] }} </b-col>
-            <b-col tag="dd" md="9">
-              <ul v-if="isArray(value)">
-                <li v-for="(item,k) in value" :key="k">{{ (typeof item === 'object')? item.name : item }}</li>
-              </ul>
-              <span v-else>{{ value }}</span>
-            </b-col>
-          </b-row>
-        </b-card-body>
-      <div class="d-flex flex-row align-items-center justify-content-center">
-        <div><b-button variant="light" class="mx-2" @click="onBackButtonClicked">入力画面に戻る</b-button></div>
-          <FmSend :yourName="formValue.name" @error="onSendError" @success="onSent" :from="formValue.email" subject="お問い合わせありがとうございます" :text="formValue.content" :data="formValueData">この内容で送信する</FmSend>
+      <!-- /#form-inputs -->
+      <div
+        id="form-confirm"
+        class="rdm-form-confirm"
+        v-if="phaseValue === phase.confirm"
+      >
+        <b-card title="この内容でよろしいですか？">
+          <b-card-text class="mb-5">
+            <ModulesDl :values="formValueData" />
+          </b-card-text>
+          <div
+            class="d-flex flex-row align-items-center justify-content-center"
+          >
+            <div>
+              <b-button
+                variant="outline-dark"
+                size="lg"
+                class="mx-3"
+                @click="onBackButtonClicked"
+                >入力画面に戻る</b-button
+              >
+            </div>
+            <FmSend
+              :yourName="formValue.name"
+              @error="onSendError"
+              @success="onSent"
+              :from="formValue.email"
+              subject="お問い合わせありがとうございます"
+              :text="formValue.content"
+              :data="formValueData"
+              >この内容で送信する</FmSend
+            >
+          </div>
+        </b-card>
       </div>
-      </b-card><!-- /#form-confirm -->
+      <!-- /#form-confirm -->
     </form>
     <div>
-  <b-jumbotron header="✓送信完了" lead="お問い合わせありがとうございました。" v-if="phaseValue === phase.complete">
-    <p>3営業日以内にメールの返信をさせていただきます。しばらくお待ちください。</p>
-    <b-button variant="primary" @click="onResetButtonClicked">入力画面に戻る</b-button>
-  </b-jumbotron>
-  <b-jumbotron header="×送信失敗" lead="メールの送信に失敗しました" v-if="phaseValue === phase.sendError">
-    <p>申し訳ありません、メール送信に問題が発生しております。ネットワークの接続も併せてご確認ください。</p>
-    <b-button variant="warning" @click="onBackButtonClicked">入力画面に戻る</b-button>
-  </b-jumbotron>
-</div>
+      <ModuleBravia
+        header="送信完了"
+        lead="お問い合わせありがとうございました。"
+        v-if="phaseValue === phase.complete"
+        image="https://placehold.jp/200x200.png"
+      >
+        <template v-slot:image>
+          <b-img
+            src="/images/send-mail-success.svg"
+            title=""
+            alt=""
+            width="200"
+            height="200"
+          />
+        </template>
+        <p>
+          3営業日以内にメールの返信をさせていただきます。しばらくお待ちください。
+        </p>
+        <b-button variant="primary" @click="onResetButtonClicked" size="lg"
+          >入力画面に戻る</b-button
+        >
+      </ModuleBravia>
+      <ModuleBravia
+        header="送信失敗"
+        lead="メールの送信に失敗しました"
+        v-if="phaseValue === phase.sendError"
+        image="https://placehold.jp/200x200.png"
+      >
+        <template v-slot:image>
+          <b-img
+            src="/images/send-mail-fail.svg"
+            title=""
+            alt=""
+            width="200"
+            height="200"
+          />
+        </template>
+        <p>
+          申し訳ありません、メール送信に問題が発生しております。ネットワークの接続も併せてご確認ください。
+        </p>
+        <b-button variant="warning" @click="onBackButtonClicked" size="lg"
+          >入力画面に戻る</b-button
+        >
+      </ModuleBravia>
+    </div>
   </main>
 </template>
 
 <script>
 /*global _ */
 // フォームの入力項目の構成を記載したJSONファイルを読み込む
-import formParts from '../pages/index/index.json';
+import formParts from "../pages/index/index.json";
 
 // 入力から送信までのフェーズを示す定数
 const phase = {
@@ -63,23 +151,22 @@ const phase = {
   complete: 5, // 送信に成功した状態
 };
 
-
 export default {
-  data(){
+  data() {
     return {
       // フォームに入力された値を管理する
       formValue: {},
       // エラーが発生している入力項目を管理する
-      errors: 0, 
+      errors: 0,
       // フォームの入力項目の構成を記載したJSONファイルが読み込まれる
-      formParts: formParts, 
+      formParts: formParts,
       // template節でphase定数を扱うのに必要
       phase: phase,
       // 入力フェーズを管理する
       phaseValue: phase.input,
       // リセットボタンが押されるとtrueとなり、それを検知した子コンポーネントはプロパティを初期化する
-      inReset: false
-    }
+      inReset: false,
+    };
   },
   name: "IndexPage",
   computed: {
@@ -99,25 +186,25 @@ export default {
       }
     },
     // フォーム入力項目に対して、フォームのname属性を引くための配列を生成する
-    formPartsName(){
+    formPartsName() {
       return this.getFormPartsNames();
     },
     // フォームの名前と入力値の組み合わせの配列を生成する
-    formValueData(){
+    formValueData() {
       var obj = {};
       var lookup = this.getFormPartsNames();
-      _.forEach(this.formValue,function(value,key){
-        obj[lookup[key]]=value;
+      _.forEach(this.formValue, function (value, key) {
+        obj[lookup[key]] = value;
       });
       return obj;
     },
   },
   watch: {
-    errors(){
+    errors() {
       // フォーム全体のバリデーションを行い、errorsの値がnullから別の値に更新された場合
-      if(this.phaseValue === this.phase.validate && !_.isNull(this.errors)) {
-        if(this.errors != 0){
-        // エラーがある場合
+      if (this.phaseValue === this.phase.validate && !_.isNull(this.errors)) {
+        if (this.errors != 0) {
+          // エラーがある場合
           this.phaseValue = this.phase.hasError;
           // スクロールを「入力エラーがあります」の部分に移動する
           this.scrollToErrorMsg();
@@ -126,69 +213,71 @@ export default {
           this.phaseValue = this.phase.confirm;
         }
       }
-    }
+    },
   },
   methods: {
     // 「送信確認」ボタンを押下した時の処理
-    onConfirmButtonClicked(e){
+    onConfirmButtonClicked(e) {
       // エラーをnullに設定することで、エラーの数にかかわらず$watchで検知されるようにする
       this.errors = null;
       // フォーム全体のバリデーションフェーズに移行する
       this.phaseValue = this.phase.validate;
     },
     // 「入力に戻る」ボタンを押下した場合の処理
-    onBackButtonClicked(e){
+    onBackButtonClicked(e) {
       // 入力フェーズに戻す
       this.phaseValue = this.phase.input;
     },
     // リセットボタンを押下した場合の処理
-    onResetButtonClicked(e){
+    onResetButtonClicked(e) {
       // フォームの初期化処理を行う
       this.formInitialise();
     },
     // 送信成功した場合の処理
-    onSent(msg){
-      console.log({success:msg});
+    onSent(msg) {
+      console.log({ success: msg });
       // 送信完了フェーズに移行し、送信成功画面を表示させる
       this.phaseValue = this.phase.complete;
     },
     // 送信に失敗した場合の処理
-    onSendError(err){
-      console.log({error:err});
+    onSendError(err) {
+      console.log({ error: err });
       // 送信エラーフェーズに移行し、エラー表示を行う
       this.phaseValue = this.phase.sendError;
     },
     // フォームの初期化処理
-    formInitialise(){
+    formInitialise() {
       // フォームの値を初期化する
       this.phaseValue = this.phase.input;
       this.formValue = {};
       this.errors = 0;
-      
+
       // フラグをtrueに設定し、子コンポーネントの初期化を行わせる
       this.inReset = true;
       var it = this;
       // 画面が更新されたら、子コンポーネントの初期化中フラグをfalseに戻す
-      this.$nextTick(()=> it.inReset = false);
+      this.$nextTick(() => (it.inReset = false));
     },
     // lodashが使えないtemplate節で使う関数
-    isArray(value){
+    isArray(value) {
       return _.isArray(value);
     },
     // フォームのパーツのid属性からname属性を引くための辞書を配列で用意する
-    getFormPartsNames(){
+    getFormPartsNames() {
       var obj = {};
-        _.forEach(this.formParts,function(value){obj[value.id]=value.name;});
+      _.forEach(this.formParts, function (value) {
+        obj[value.id] = value.name;
+      });
       return obj;
     },
     // エラーが発生した場合、スクロールをフォームのトップに戻す処理を行う
-    scrollToErrorMsg(){
-      document.location.href="#form";
-    }
+    scrollToErrorMsg() {
+      document.location.href = "#form";
+    },
   },
-  mounted(){
+  mounted() {
     // 読み込みがかかった場合、子コンポーネントの初期化をさせる
     this.formInitialise();
-  }
+  },
 };
 </script>

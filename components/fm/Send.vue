@@ -2,8 +2,9 @@
   <!--送信ボタンを表示する。クリックされると管理者側へメールが送信される-->
     <b-button
       v-if="phase === condition.waitForSend"
-      variant="danger"
-      class="mx-2"
+      size="lg"
+      variant="primary"
+      class="mx-3"
       @click="sendMail"
     >
       <slot />
@@ -17,7 +18,7 @@
       :subject="yourName + '様よりお問い合わせがありました'"
       :text="dataToString"
       :data="data"
-    ><b-button disabled variant="warning"><b-spinner label="管理者側へ送信中" small></b-spinner></b-button>
+    ><b-button disabled variant="warning" size="lg"><b-spinner label="管理者側へ送信中" small></b-spinner></b-button>
     </FmMailgun>
     <!--顧客へメールのカーボンコピーを送信する-->
     <FmMailgun
@@ -29,7 +30,7 @@
       subject="お問い合わせありがとうございます"
       :data="data"
       template="rdmsys-inquiry"
-      ><b-button disabled variant="secondary"><b-spinner label="顧客側へ送信中" small></b-spinner></b-button>
+      ><b-button disabled variant="secondary" size="lg"><b-spinner label="顧客側へ送信中" small></b-spinner></b-button>
     </FmMailgun>
 </template>
 

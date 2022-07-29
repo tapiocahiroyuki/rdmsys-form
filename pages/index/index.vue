@@ -1,13 +1,8 @@
 <template>
   <section id="form-before">
-    <div class="mb-3">
-      <b-card title="お気軽にお問い合わせください" bg-variant="light">
-        <p class="mb-0">Red Magic Systemsにつきまして、ご要望、ご不明点、サイト運営者へのリクエストがございましたら、こちらのフォームに記載を行ってください。<br />2~3営業日以内に回答をさせていただきます。</p>
-      </b-card>
+    <ModulesH2>お気軽にお問い合わせください</ModulesH2>
+    <div class="mx-5">
+      <p class="form-before-p">Red Magic Systemsにつきまして、ご要望、ご不明点、サイト運営者へのリクエストがございましたら、こちらのフォームに記載を行ってください。<br />2~3営業日以内に回答をさせていただきます。</p>
     </div>
   </section>
 </template>
-
-
-
-

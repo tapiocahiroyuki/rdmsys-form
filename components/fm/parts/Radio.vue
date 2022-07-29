@@ -1,6 +1,6 @@
 <template>
   <FmPartsBase :label="label" :required="required" :id="id" :errors="errors">
-    <b-form-group :label="label" v-slot="{ ariaDescribedby }" :id="id">
+    <b-form-group v-slot="{ ariaDescribedby }" :id="id">
       <b-form-radio
         v-for="(item, key) in options"
         v-model="formValue"

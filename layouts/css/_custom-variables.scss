@@ -2,15 +2,15 @@
 // これによりテーマ/スタイルをカスタマイズすることができます。
 
 $white: hsl(0, 0%, 100%);
-$gray-100: hsl(345, 1%, 97%);
-$gray-200: hsl(345, 2%, 92%);
-$gray-300: hsl(345, 3%, 86%);
-$gray-400: hsl(345, 4%, 73%);
-$gray-500: hsl(345, 5%, 64%);
-$gray-600: hsl(345, 6%, 53%);
-$gray-700: hsl(345, 7%, 42%);
-$gray-800: rgb(77, 66, 69);
-$gray-900: rgb(44, 37, 39);
+$gray-100: hsl(14, 1%, 98%);
+$gray-200: hsl(14, 2%, 93%);
+$gray-300: hsl(14, 3%, 87%);
+$gray-400: hsl(14, 4%, 75%);
+$gray-500: hsl(14, 5%, 66%);
+$gray-600: hsl(14, 6%, 56%);
+$gray-700: hsl(14, 7%, 46%);
+$gray-800: hsl(14, 8%, 28%);
+$gray-900: hsl(14, 9%, 16%);
 $black: hsl(0, 0%, 0%);
 
 $grays: (
@@ -33,10 +33,10 @@ $yellow: #ffd105;
 $yellowish-green: #87c90c;
 $green: #28a018;
 $teal: #18c488;
-$cyan: #31cec6;
+$cyan: #16A1B7;
 $blue: #128cff;
 $purple: #8842c2;
-$pink: #e740da;
+$pink: #dc3599;
 
 $beige: #cc9966;
 
@@ -60,10 +60,10 @@ $colors: map-merge(("blue": $blue,
 $primary: $red;
 $secondary: $beige;
 $success: $green;
-$info: $teal;
+$info: $cyan;
 $warning: $yellow;
-$danger: $orange;
-$light: $gray-200;
+$danger: $pink;
+$light: $gray-100;
 $dark: $gray-700;
 
 $theme-colors: (
@@ -88,13 +88,37 @@ $spacers: map-merge(
   $spacers
 );
 
-$font-size-base: 1rem;
+$font-size-base: 1.25rem;
 $font-weight-base: $font-weight-light;
+$line-height-base: 1.6;
 $body-color:                $gray-800;
+$headings-color: $gray-900;
 $link-color:                              theme-color("primary");
 $link-decoration:                         underline;
 $link-hover-color:                        darken($link-color, 15%);
 $link-hover-decoration:                   none;
+$form-feedback-valid-color:         theme-color("success");
+$form-feedback-invalid-color:       theme-color("danger");
+$input-placeholder-color:               $gray-400;
+
+$form-validation-states:();
+$form-validation-states: map-merge(
+  (
+    "valid": (
+      "color": $form-feedback-valid-color,
+      "icon": $form-feedback-icon-valid
+    ),
+    "invalid": (
+      "color": $form-feedback-invalid-color,
+      "icon": $form-feedback-icon-invalid
+    ),
+  ),
+  $form-validation-states
+);
+
+$card-border-color: $gray-400;
+$card-spacer-x: 2.5rem;
+$card-spacer-y: 2rem;
 
 @import './custom-font-style.scss';
 

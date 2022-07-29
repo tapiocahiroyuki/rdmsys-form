@@ -1,7 +1,7 @@
 <template>
-  <b-progress class="my-3 border" max="3" height="2rem" striped>
-    <b-progress-bar value="1" :variant="(num<=phase)?'danger':'light'" v-for="(label,num) in labels" :key="num">
-        <span :class="(num<=phase)?'text-white':'text-dark'">{{label}}</span>
+  <b-progress class="rdm-progress my-3 border" max="3" height="2.5rem">
+    <b-progress-bar class="rdm-progress-item" value="1" :variant="(num<=phase)?'primary':'light'" v-for="(label,num) in labels" :key="num">
+        <span :class="(num<=phase)?'text-white':'text-dark'"><b class="rdm-progress-text fw-500">{{label}}</b></span>
     </b-progress-bar>
   </b-progress>
 </template>
@@ -22,3 +22,17 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.rdm-progress-item{
+    position: relative;
+}
+.rdm-progress-text{
+    font-size: 1.3rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+</style>
