@@ -8,3 +8,9 @@
 
 // 値をカスタマイズします
 @import "custom-variables";
+
+// bootstrapのmixinが使えるようにします。
+@import "bootstrap/scss/mixins";
+
+// 自サイトで使うmixin/extentionを定義します。
+@import './mixins/font-md';

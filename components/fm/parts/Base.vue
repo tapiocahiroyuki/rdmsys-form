@@ -36,8 +36,11 @@ export default {
     padding: 1rem;
     margin-bottom: 0;
 
-    color: $gray-700;
+    color: $gray-800;
     font-size: 1rem;
+    @include media-breakpoint-down(sm){
+      padding: 2rem 1rem;
+    }
   }
 
   .rdm-form-part-title{
@@ -45,7 +48,20 @@ export default {
 
     color: $gray-900;
     font-size: 1.1rem;
+    @include media-breakpoint-down(sm){
+      padding: .75rem 1rem;
+      border-bottom: 1px solid $gray-300;
+    }
+
+    > label{
+      margin-bottom: .25rem;
+      @include media-breakpoint-down(sm){
+        margin-bottom: 0;
+        
+      }
+    }
   }
+
   .form-group{
     margin-bottom: 0;
   }

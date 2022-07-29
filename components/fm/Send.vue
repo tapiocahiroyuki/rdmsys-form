@@ -4,7 +4,7 @@
       v-if="phase === condition.waitForSend"
       size="lg"
       variant="primary"
-      class="mx-3"
+      class="rdm-form-btn"
       @click="sendMail"
     >
       <slot />

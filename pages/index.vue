@@ -26,29 +26,27 @@
           :validate="phaseValue === phase.validate"
           :inReset="inReset"
         />
-        <div
-          class="d-flex flex-row align-items-center justify-content-center mb-3"
-        >
-          <div>
+        <b-row>
+          <b-col cols="6" class="text-right">
             <b-button
               variant="outline-dark"
               type="reset"
-              class="mx-2"
+              class="rdm-form-btn"
               @click="onResetButtonClicked"
               size="lg"
               >リセット</b-button
             >
-          </div>
-          <div>
+          </b-col>
+          <b-col cols="6" class="text-left">
             <b-button
               variant="info"
-              class="mx-2"
+              class="rdm-form-btn text-left"
               @click="onConfirmButtonClicked"
               size="lg"
               >送信確認</b-button
             >
-          </div>
-        </div>
+          </b-col>
+      </b-row>
       </div>
       <!-- /#form-inputs -->
       <div
@@ -60,18 +58,17 @@
           <b-card-text class="mb-5">
             <ModulesDl :values="formValueData" />
           </b-card-text>
-          <div
-            class="d-flex flex-row align-items-center justify-content-center"
-          >
-            <div>
+          <b-row>
+            <b-col cols="6" class="text-right">
               <b-button
                 variant="outline-dark"
                 size="lg"
-                class="mx-3"
+                class="rdm-form-btn"
                 @click="onBackButtonClicked"
                 >入力画面に戻る</b-button
               >
-            </div>
+            </b-col>
+            <b-col cols="6" class="text-left">
             <FmSend
               :yourName="formValue.name"
               @error="onSendError"
@@ -82,13 +79,14 @@
               :data="formValueData"
               >この内容で送信する</FmSend
             >
-          </div>
+            </b-col>
+          </b-row>
         </b-card>
       </div>
       <!-- /#form-confirm -->
     </form>
     <div>
-      <ModuleBravia
+      <ModulesBravia
         header="送信完了"
         lead="お問い合わせありがとうございました。"
         v-if="phaseValue === phase.complete"
@@ -106,11 +104,13 @@
         <p>
           3営業日以内にメールの返信をさせていただきます。しばらくお待ちください。
         </p>
-        <b-button variant="primary" @click="onResetButtonClicked" size="lg"
+          <div class="text-center text-md-left">
+        <b-button variant="primary" @click="onResetButtonClicked" size="lg" class="rdm-form-btn"
           >入力画面に戻る</b-button
         >
-      </ModuleBravia>
-      <ModuleBravia
+          </div>
+      </ModulesBravia>
+      <ModulesBravia
         header="送信失敗"
         lead="メールの送信に失敗しました"
         v-if="phaseValue === phase.sendError"
@@ -128,10 +128,12 @@
         <p>
           申し訳ありません、メール送信に問題が発生しております。ネットワークの接続も併せてご確認ください。
         </p>
-        <b-button variant="warning" @click="onBackButtonClicked" size="lg"
+          <div class="text-center text-md-left">
+        <b-button variant="warning" @click="onBackButtonClicked" size="lg" class="rdm-form-btn"
           >入力画面に戻る</b-button
         >
-      </ModuleBravia>
+          </div>
+      </ModulesBravia>
     </div>
   </main>
 </template>

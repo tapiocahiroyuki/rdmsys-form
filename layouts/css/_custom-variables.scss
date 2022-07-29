@@ -101,6 +101,9 @@ $form-feedback-valid-color:         theme-color("success");
 $form-feedback-invalid-color:       theme-color("danger");
 $input-placeholder-color:               $gray-400;
 
+$navbar-brand-padding-y: 0;
+$navbar-brand-padding-x: 0;
+
 $form-validation-states:();
 $form-validation-states: map-merge(
   (

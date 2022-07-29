@@ -20,9 +20,10 @@
           <p class="mb-5">
             3営業日以内にメールの返信をさせていただきます。しばらくお待ちください。
           </p>
-          <b-button variant="primary" @click="onResetButtonClicked" size="lg"
-            >入力画面に戻る</b-button
-          >
+          <div class="text-center text-md-left">
+            <b-button variant="primary" @click="onResetButtonClicked" size="lg" class="rdm-form-btn"
+              >入力画面に戻る</b-button>
+          </div>
         </ModulesBravia>
       </li>
       <li

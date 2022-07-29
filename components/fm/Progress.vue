@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../layouts/css/initialization";
+
 .rdm-progress-item{
     position: relative;
 }
@@ -33,6 +35,9 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    @include media-breakpoint-down(sm){
+        font-size: .85rem;
+  }
 }
 
 </style>

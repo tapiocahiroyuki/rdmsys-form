@@ -29,6 +29,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../layouts/css/initialization';
+
 .rdm-dl{
     margin-bottom: .25rem;
     .rdm-dd, .rdm-dt, ul {
@@ -38,5 +40,6 @@ export default {
 .rdm-dt-cell,
 .rdm-dd-cell{
     padding: 0.75rem 1rem;
+    @extend %font-md;
 }
 </style>

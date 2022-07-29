@@ -1,6 +1,6 @@
 <template>
   <div class="rdm-h2-container">
-    <component :is="tag || 'h2'" class="rdm-h2 border-bottom py-3"
+    <component :is="tag || 'h2'" class="rdm-h2 border-bottom"
       ><i class="rdm-h2-bullet"></i><slot
     /></component>
   </div>
@@ -16,11 +16,16 @@ export default {
 @import "../../layouts/css/initialization";
 
 .rdm-h2 {
-  font-size: 2rem;
-  @include font-weight(600);
+  padding: 1rem 0 1rem 1em;
 
   text-indent: -1em;
-  padding-left: 1em;
+  font-size: 2rem;
+  @include font-weight(700);
+  @include media-breakpoint-down(sm){
+    padding: .25rem 0 .25rem 1em;
+
+    font-size: 1rem;
+  }
 }
 
 .rdm-h2-bullet::before {
