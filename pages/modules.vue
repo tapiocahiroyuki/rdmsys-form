@@ -2,6 +2,27 @@
   <div id="bs-modules">
     <ul class="modules-list list-unstyled">
       <li class="modules-item mb-5">
+        <h2 class="bs-modules-title">buttons</h2>
+        <ModulesButtons>
+          <template #left>
+            <b-button
+              variant="outline-dark"
+              @click="onResetButtonClicked"
+              class="rdm-form-btn"
+              >前の画面に戻る</b-button
+            >
+          </template>
+          <template #right>
+            <b-button
+              variant="primary"
+              @click="onResetButtonClicked"
+              class="rdm-form-btn"
+              >入力画面に戻る</b-button
+            >
+          </template>
+        </ModulesButtons>
+      </li>
+      <li class="modules-item mb-5">
         <h2 class="bs-modules-title">bravia</h2>
         <ModulesBravia
           header="送信完了"
@@ -21,8 +42,13 @@
             3営業日以内にメールの返信をさせていただきます。しばらくお待ちください。
           </p>
           <div class="text-center text-md-left">
-            <b-button variant="primary" @click="onResetButtonClicked" size="lg" class="rdm-form-btn"
-              >入力画面に戻る</b-button>
+            <b-button
+              variant="primary"
+              @click="onResetButtonClicked"
+              size="lg"
+              class="rdm-form-btn"
+              >入力画面に戻る</b-button
+            >
           </div>
         </ModulesBravia>
       </li>
