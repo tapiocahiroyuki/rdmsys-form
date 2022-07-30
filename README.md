@@ -66,3 +66,8 @@ mailgunのAPIキーと運営側のメールアドレスは「環境定数」と�
 | placeholder | String | placeholderの値として反映されます。 |
 | options | Array | Radio、Checkbox、Select、Ratingにおける選択肢の記載を行います。<br>Rating以外の実装方法はBootstrapVueに準じます。<br>Radio: https://bootstrap-vue.org/docs/components/form-radio#radio-group-options-array<br>Checkbox: https://bootstrap-vue.org/docs/components/form-checkbox#checkbox-group-options-array<br>Select: https://bootstrap-vue.org/docs/components/form-select#options-property<br>Ratingの場合は、星の数に応じてテキストがメッセージに反映されます。例えば★1の場合は、options配列の1番目のテキストが送信されます。 |
 | accept | String | （Fileコンポーネントのみ）accept属性として反映されます。 |
+
+## License (App)
+MIT
+
+※実際に公開しているサイト（*.rdmsys.net）は著作権 Copyright(c) を明示しています。

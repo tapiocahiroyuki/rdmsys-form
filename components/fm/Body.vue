@@ -1,5 +1,5 @@
 <template>
-  <section id="form-body">
+  <section id="form-body" class="rdm-form-block">
     <b-spinner label="Spinning" v-if="!formParts"/>
     <Component v-else 
       v-for="(part, key) in formParts"
@@ -83,6 +83,23 @@ export default {
 };
 </script>
 
+<style lang="scss">
+@import "../../layouts/css/initialization";
+
+$rdm-form-border-style: 1px solid $gray-700;
+.rdm-form-block{
+  > .rdm-form-group{
+    &:first-of-type{
+      border-top: $rdm-form-border-style;
+    }
+    border-bottom: $rdm-form-border-style;
+  }
+}
+
+.rdm-form-block{
+  margin-bottom: 3rem;
+}
+</style>
 
 
 
