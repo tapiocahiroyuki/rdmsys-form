@@ -123,5 +123,8 @@ $card-border-color: $gray-400;
 $card-spacer-x: 2.5rem;
 $card-spacer-y: 2rem;
 
+$font-family-base: "UDKakugo_SmallPr6-L", "HiraginoSans-W3","ヒラギノ角ゴ ProN W3", HiraKakuProN-W3, 游ゴシック, "Yu Gothic", メイリオ, Meiryo, #{$font-family-base};
+
+
 @import './custom-font-style.scss';
 

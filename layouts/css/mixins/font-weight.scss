@@ -20,6 +20,6 @@ $font-weights: map-merge((900: "U",
     @if($important){$text-important: '!important';}
 
     $value: map-get($font-weights, $weight);
-    font-family: 'UDKakugo_SmallPr6-#{$value}' #{$text-important};
+    font-family: "UDKakugo_SmallPr6-#{$value}", #{$text-important};
     font-weight: $weight #{$text-important};
 }
