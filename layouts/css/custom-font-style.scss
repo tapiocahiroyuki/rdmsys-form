@@ -1,0 +1,10 @@
+// フォントウェイトをクラスで定義するためのモジュールです
+
+@import './mixins/font-weight.scss';
+
+@each $key,$value in $font-weights {
+ .fw-#{$key}{
+  @include font-weight($key,true);
+ }
+}
+

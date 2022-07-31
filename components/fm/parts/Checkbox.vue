@@ -1,5 +1,6 @@
 <template>
   <FmPartsBase :label="label" :required="required" :id="id" :errors="errors">
+      <div class="px-3 px-md-0">
     <b-form-group v-slot="{ ariaDescribedby }">
       <b-form-checkbox-group
         :id="`checkbox-${id}`"
@@ -19,6 +20,7 @@
       >
       </b-form-checkbox-group>
     </b-form-group>
+      </div>
   </FmPartsBase>
 </template>
 

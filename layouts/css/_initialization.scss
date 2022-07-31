@@ -1,0 +1,16 @@
+// サイトで使う変数を生成します。
+// これをcomponentのstyle節でimportする記載を追加することにより、Bootstrapの変数が利用可能となります。
+
+// Bootstrapで使う変数の初期値や関数を定義します
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+// 値をカスタマイズします
+@import "custom-variables";
+
+// bootstrapのmixinが使えるようにします。
+@import "bootstrap/scss/mixins";
+
+// 自サイトで使うmixin/extentionを定義します。
+@import './mixins/font-md';

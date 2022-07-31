@@ -1,0 +1,130 @@
+// Bootstrapで利用する値を上書きします。
+// これによりテーマ/スタイルをカスタマイズすることができます。
+
+$white: hsl(0, 0%, 100%);
+$gray-100: hsl(14, 1%, 98%);
+$gray-200: hsl(14, 2%, 93%);
+$gray-300: hsl(14, 3%, 87%);
+$gray-400: hsl(14, 4%, 75%);
+$gray-500: hsl(14, 5%, 66%);
+$gray-600: hsl(14, 6%, 56%);
+$gray-700: hsl(14, 7%, 46%);
+$gray-800: hsl(14, 8%, 28%);
+$gray-900: hsl(14, 9%, 16%);
+$black: hsl(0, 0%, 0%);
+
+$grays: (
+);
+$grays: map-merge(("100": $gray-100,
+      "200": $gray-200,
+      "300": $gray-300,
+      "400": $gray-400,
+      "500": $gray-500,
+      "600": $gray-600,
+      "700": $gray-700,
+      "800": $gray-800,
+      "900": $gray-900 ),
+    $grays);
+
+
+$red: #cc0033;
+$orange: #e84707;
+$yellow: #ffd105;
+$yellowish-green: #87c90c;
+$green: #28a018;
+$teal: #18c488;
+$cyan: #16A1B7;
+$blue: #128cff;
+$purple: #8842c2;
+$pink: #dc3599;
+
+$beige: #cc9966;
+
+$colors: (
+);
+$colors: map-merge(("blue": $blue,
+      "yellowish-green": $yellowish-green,
+      "purple": $purple,
+      "pink": $pink,
+      "red": $red,
+      "orange": $orange,
+      "yellow": $yellow,
+      "green": $green,
+      "teal": $teal,
+      "cyan": $cyan,
+      "white": $white,
+      "gray": $gray-700,
+      "gray-dark": $gray-800 ),
+    $colors);
+
+$primary: $red;
+$secondary: $beige;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $pink;
+$light: $gray-100;
+$dark: $gray-700;
+
+$theme-colors: (
+);
+$theme-colors: map-merge(("primary": $primary,
+      "secondary": $secondary,
+      "success": $success,
+      "info": $info,
+      "warning": $warning,
+      "danger": $danger,
+      "light": $light,
+      "dark": $dark ),
+    $theme-colors);
+
+$enable-shadows:                              true;
+$enable-responsive-font-sizes:                true;
+
+$spacers: map-merge(
+  (
+    6: ($spacer * 4)
+  ),
+  $spacers
+);
+
+$font-size-base: 1.25rem;
+$font-weight-base: $font-weight-light;
+$line-height-base: 1.6;
+$body-color:                $gray-800;
+$headings-color: $gray-900;
+$link-color:                              theme-color("primary");
+$link-decoration:                         underline;
+$link-hover-color:                        darken($link-color, 15%);
+$link-hover-decoration:                   none;
+$form-feedback-valid-color:         theme-color("success");
+$form-feedback-invalid-color:       theme-color("danger");
+$input-placeholder-color:               $gray-400;
+
+$navbar-brand-padding-y: 0;
+$navbar-brand-padding-x: 0;
+
+$form-validation-states:();
+$form-validation-states: map-merge(
+  (
+    "valid": (
+      "color": $form-feedback-valid-color,
+      "icon": $form-feedback-icon-valid
+    ),
+    "invalid": (
+      "color": $form-feedback-invalid-color,
+      "icon": $form-feedback-icon-invalid
+    ),
+  ),
+  $form-validation-states
+);
+
+$card-border-color: $gray-400;
+$card-spacer-x: 2.5rem;
+$card-spacer-y: 2rem;
+
+$font-family-base: "UDKakugo_SmallPr6-L", "HiraginoSans-W3","ヒラギノ角ゴ ProN W3", HiraKakuProN-W3, 游ゴシック, "Yu Gothic", メイリオ, Meiryo, #{$font-family-base};
+
+
+@import './custom-font-style.scss';
+

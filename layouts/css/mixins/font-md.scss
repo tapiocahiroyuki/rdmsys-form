@@ -1,0 +1,11 @@
+// @extend font-md
+// 画面幅xs、smの時は文字を小さくします。
+
+%font-md{
+    font-size: 1.25rem;
+    line-height: 1.6;
+      @include media-breakpoint-down(sm){
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+}
