@@ -87,6 +87,6 @@ export default {
     }
   },
 
-  ssr: false, // サーバーサイドレンダリングを無効化
-  target: 'server'
+  ssr: true,
+  target: 'static'
 }
